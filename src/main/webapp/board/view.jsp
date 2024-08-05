@@ -76,12 +76,17 @@ if (session != null) {
 <div class = "button-container">
 <input type="button" value="목록보기" onclick="location.href='list.jsp'">
 <% if (name != null) { %>
-    <input type="button" value="수정" onclick="location.href='edit.jsp?num=<%=dto.getNum()%>'">
-    <input type="button" value="삭제" onclick="location.href='delete.jsp?num=<%=dto.getNum()%>'">
-<% } else { %>
-    <input type="button" value="수정" onclick="alert('로그인이 필요합니다.'); location.href='../login.jsp'">
-    <input type="button" value="삭제" onclick="alert('로그인이 필요합니다.'); location.href='../login.jsp'">
-<% } %>
+        <% if (dto.getWriter().equals(name)) { %> <!-- 작성자와 로그인된 사용자 확인 -->
+            <input type="button" value="수정" onclick="location.href='edit.jsp?num=<%=dto.getNum()%>'">
+            <input type="button" value="삭제" onclick="location.href='delete.jsp?num=<%=dto.getNum()%>'">
+        <% } else { %>
+            <input type="button" value="수정" onclick="alert('본인의 게시물만 수정할 수 있습니다.');">
+            <input type="button" value="삭제" onclick="alert('본인의 게시물만 삭제할 수 있습니다.');">
+        <% } %>
+    <% } else { %>
+        <input type="button" value="수정" onclick="alert('로그인이 필요합니다.'); location.href='../login.jsp'">
+        <input type="button" value="삭제" onclick="alert('로그인이 필요합니다.'); location.href='../login.jsp'">
+    <% } %>
 </div>
 </body>
 </html>
